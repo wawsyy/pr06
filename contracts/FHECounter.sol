@@ -6,7 +6,12 @@ import {SepoliaConfig} from "@fhevm/solidity/config/ZamaConfig.sol";
 
 /// @title A simple FHE counter contract
 contract FHECounter is SepoliaConfig {
+    address private immutable _deployer;
     euint32 private _count;
+
+    constructor() {
+        _deployer = msg.sender;
+    }
 
     /// @notice Returns the current count
     function getCount() external view returns (euint32) {
@@ -35,5 +40,13 @@ contract FHECounter is SepoliaConfig {
 
         FHE.allowThis(_count);
         FHE.allow(_count, msg.sender);
+    }
+
+    /// @notice Resets the counter to zero.
+    /// @dev Only allows the contract deployer to reset the counter.
+    function reset() external {
+        require(msg.sender == _deployer, "Only deployer can reset");
+        _count = FHE.asEuint32(0);
+        FHE.allowThis(_count);
     }
 }

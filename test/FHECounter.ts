@@ -99,4 +99,49 @@ describe("FHECounter", function () {
 
     expect(clearCountAfterInc).to.eq(0);
   });
+
+  it("reset the counter to zero", async function () {
+    // First increment by 5
+    const clearFive = 5;
+    const encryptedFive = await fhevm
+      .createEncryptedInput(fheCounterContractAddress, signers.deployer.address)
+      .add32(clearFive)
+      .encrypt();
+
+    let tx = await fheCounterContract
+      .connect(signers.deployer)
+      .increment(encryptedFive.handles[0], encryptedFive.inputProof);
+    await tx.wait();
+
+    // Verify count is 5
+    let encryptedCount = await fheCounterContract.getCount();
+    let clearCount = await fhevm.userDecryptEuint(
+      FhevmType.euint32,
+      encryptedCount,
+      fheCounterContractAddress,
+      signers.deployer,
+    );
+    expect(clearCount).to.eq(clearFive);
+
+    // Now reset the counter
+    tx = await fheCounterContract.connect(signers.deployer).reset();
+    await tx.wait();
+
+    // Verify count is back to 0
+    encryptedCount = await fheCounterContract.getCount();
+    clearCount = await fhevm.userDecryptEuint(
+      FhevmType.euint32,
+      encryptedCount,
+      fheCounterContractAddress,
+      signers.deployer,
+    );
+    expect(clearCount).to.eq(0);
+  });
+
+  it("only deployer can reset the counter", async function () {
+    // Try to reset from non-deployer account
+    await expect(
+      fheCounterContract.connect(signers.alice).reset()
+    ).to.be.revertedWith("Only deployer can reset");
+  });
 });

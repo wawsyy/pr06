@@ -11,11 +11,18 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "removeComments": true,
     "resolveJsonModule": true,
     "sourceMap": true,
     "strict": true,
-    "target": "es2022" // get error cause (ErrorOptions)
+    "target": "es2022", // get error cause (ErrorOptions)
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true
   },
   "exclude": ["node_modules"],
   "files": ["./hardhat.config.ts"],

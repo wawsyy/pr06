@@ -6,7 +6,13 @@
 export const EncryptedLuckyDrawABI = {
   "abi": [
     {
-      "inputs": [],
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "maxParticipants",
+          "type": "uint256"
+        }
+      ],
       "stateMutability": "nonpayable",
       "type": "constructor"
     },
@@ -161,6 +167,19 @@ export const EncryptedLuckyDrawABI = {
     {
       "inputs": [],
       "name": "lastDrawTimestamp",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "maxParticipants",
       "outputs": [
         {
           "internalType": "uint256",

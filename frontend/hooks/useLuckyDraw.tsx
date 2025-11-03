@@ -442,7 +442,7 @@ export function useLuckyDraw({
         typeof value === "boolean"
           ? value
           : typeof value === "bigint"
-            ? value === 1n
+            ? value === BigInt(1)
             : Boolean(Number(value ?? 0));
 
       setDecryptedStatus(boolValue);
@@ -515,4 +515,5 @@ export function useLuckyDraw({
     isConnected,
   };
 }
+
 

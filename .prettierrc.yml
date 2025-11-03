@@ -2,6 +2,14 @@ plugins:
   - "prettier-plugin-solidity"
 printWidth: 120
 trailingComma: "all"
+semi: true
+singleQuote: false
+tabWidth: 2
+useTabs: false
+quoteProps: "as-needed"
+bracketSpacing: true
+bracketSameLine: false
+arrowParens: "always"
 
 overrides:
   - files: "*.md"

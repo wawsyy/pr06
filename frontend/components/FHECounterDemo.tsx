@@ -11,14 +11,13 @@ import { useFHECounter } from "@/hooks/useFHECounter";
 const MOCK_CHAINS = { 31337: "http://127.0.0.1:8545" };
 
 export function FHECounterDemo() {
-  const { address, isConnected } = useAccount();
+  const { isConnected } = useAccount();
   const chainId = useChainId();
   const { storage } = useInMemoryStorage();
   const { provider, signer, eip1193 } = useBrowserEthers();
 
   const {
     instance,
-    status: fhevmStatus,
     error: fhevmError,
   } = useFhevm({
     provider: eip1193,

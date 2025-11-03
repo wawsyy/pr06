@@ -136,7 +136,7 @@ export function useLuckyDraw({
     if (!contractInfo?.address) {
       return null;
     }
-    if (contractRef.current && contractRef.current.target === contractInfo.address) {{
+    if (contractRef.current && contractRef.current.target === contractInfo.address) {
       return contractRef.current;
     }
     const runner = signer ?? provider;

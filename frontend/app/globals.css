@@ -1,0 +1,27 @@
+@import "@rainbow-me/rainbowkit/styles.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at top, #f2f6ff 0%, #edf0ff 40%, #fdfdff 100%);
+  color: #0d1325;
+}
+
+.app-gradient {
+  background: linear-gradient(135deg, rgba(76, 76, 255, 0.1), rgba(19, 102, 238, 0.18));
+}
+
+.card-surface {
+  @apply rounded-3xl border border-slate-200/70 bg-white/90 backdrop-blur-xl shadow-[0_18px_45px_-20px_rgba(46,61,98,0.3)];
+}
+
+.badge-chip {
+  @apply inline-flex items-center rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-indigo-600;
+}

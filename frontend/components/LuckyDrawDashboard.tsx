@@ -40,6 +40,17 @@ export function LuckyDrawDashboard() {
 
   const { refresh, canUseContract } = luckyDraw;
 
+  const friendlyFhevmError = useMemo(() => {
+    if (!fhevmError) {
+      return undefined;
+    }
+    const raw = fhevmError.message ?? "";
+    if (raw.includes("Result::unwrap_throw")) {
+      return "FHE 执行环境正在恢复，请稍后点击 Refresh 再试。";
+    }
+    return "FHE 执行环境暂不可用，请刷新页面或重新连接钱包。";
+  }, [fhevmError]);
+
   useEffect(() => {
     if (canUseContract && (signer || provider)) {
       refresh();
@@ -180,9 +191,9 @@ export function LuckyDrawDashboard() {
               </dd>
             </div>
           </dl>
-          {fhevmError && (
-            <p className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-600">
-              {fhevmError.message}
+          {friendlyFhevmError && (
+            <p className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-700">
+              {friendlyFhevmError}
             </p>
           )}
           {luckyDraw.message && (
